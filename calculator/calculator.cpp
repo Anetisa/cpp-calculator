@@ -14,59 +14,59 @@ bool ReadNumber(Number& result){
 
 bool RunCalculatorCycle(){
     Number num_buf;
-    Number num1;
+    Number num_left;
     bool save_fl = false;
-    if(ReadNumber(num1)){
+    if(ReadNumber(num_left)){
         while(true){
             std::string str;
-            Number num2;
+            Number num_right;
             
             std::cin >> str;
             if(str == "+"){
-                if(!ReadNumber(num2)){
+                if(!ReadNumber(num_right)){
                     return false;
                 }
-                num1 += num2;
+                num_left += num_right;
             } else if(str == "-"){
-                if(!ReadNumber(num2)){
+                if(!ReadNumber(num_right)){
                      return false;
                 }
-                num1 -= num2;
+                num_left -= num_right;
             } else if(str == "/"){
-                if(!ReadNumber(num2)){
+                if(!ReadNumber(num_right)){
                      return false;
                 }
-                num1 /= num2;
+                num_left /= num_right;
             } else if(str == "*"){
-                if(!ReadNumber(num2)){
+                if(!ReadNumber(num_right)){
                     return false;
                 }
-                num1 *= num2;
+                num_left *= num_right;
             } else if(str == "**"){
-                if(!ReadNumber(num2)){
+                if(!ReadNumber(num_right)){
                      return false;
                 }
-                num1 = std::pow(num1, num2);
+                num_left = std::pow(num_left, num_right);
             } else if(str == "="){
-                std::cout << num1 << std::endl;
+                std::cout << num_left << std::endl;
             } else if(str == ":"){
-                if(!ReadNumber(num2)){
+                if(!ReadNumber(num_right)){
                      return false;
                 }
-                num1 = num2;
+                num_left = num_right;
             } else if(str == "c"){
-                num1 = 0;
+                num_left = 0;
             } else if(str == "q"){
                 return true;
             } else if(str == "s"){
-                num_buf = num1;
+                num_buf = num_left;
                 save_fl = true;
             } else if(str == "l"){
                 if(!save_fl){
                     std::cerr << "Error: Memory is empty" << std::endl;
                     return false;
                 }
-                num1 = num_buf;
+                num_left = num_buf;
             } else {
                 std::cerr << "Error: Unknown token " << str << std::endl;
                 return false;
