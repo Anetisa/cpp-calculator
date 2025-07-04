@@ -9,15 +9,7 @@ namespace Ui {
 class MainWindow;
 }
 QT_END_NAMESPACE
-/*
-enum CalcOperations{
-    NO_OPERATION, // операция не задана
-    ADDITION, // плюс
-    SUBTRACTION, // минус
-    MULTIPLICATION, // умножить
-    DIVISION, // поделить
-    POWER // возведение в степень
-};*/
+
 enum class Operation {
     NO_OPERATION,
     MULTIPLICATION,
