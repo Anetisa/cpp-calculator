@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget* parent)
     ui->l_result->setText("0");
     ui->l_memory->setText("");
     ui->l_formula->setText("");
+    waiting_for_new_number_ = false;
 }
 
 MainWindow::~MainWindow() {
@@ -62,6 +63,11 @@ void MainWindow::SetText(const QString &text)
 
 void MainWindow::AddText(const QString &suffix)
 {
+    if (waiting_for_new_number_) {
+        input_number_.clear();
+        waiting_for_new_number_ = false;
+    }
+
     input_number_ += suffix;
     SetText(input_number_);
 }
@@ -111,6 +117,16 @@ void MainWindow::on_tb_reset_clicked()
 
 void MainWindow::on_tb_negate_clicked()
 {
+    if (std::isnan(active_number_)) {
+        return;
+    }
+
+    if (input_number_.isEmpty()) {
+        active_number_ = -active_number_;
+        ui->l_result->setText(QString::number(active_number_));
+        return;
+    }
+
     if (input_number_.startsWith("-")) {
         SetText(input_number_.mid(1));
     } else {
@@ -127,7 +143,8 @@ void MainWindow::SetOperation(Operation op){
                           .arg(QString::number(calculator_.GetNumber()))
                           .arg(OpToString(op));
     ui->l_formula->setText(formula);
-    input_number_.clear();
+
+    waiting_for_new_number_ = true;
 }
 
 void MainWindow::on_tb_power_clicked()
@@ -197,6 +214,7 @@ void MainWindow::on_tb_equal_clicked()
     ui->l_result->setText(QString::number(active_number_));
     input_number_.clear();
     current_operation_ = Operation::NO_OPERATION;
+    waiting_for_new_number_ = true;
 }
 
 void MainWindow::on_tb_backspace_clicked()

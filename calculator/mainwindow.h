@@ -9,7 +9,15 @@ namespace Ui {
 class MainWindow;
 }
 QT_END_NAMESPACE
-
+/*
+enum CalcOperations{
+    NO_OPERATION, // операция не задана
+    ADDITION, // плюс
+    SUBTRACTION, // минус
+    MULTIPLICATION, // умножить
+    DIVISION, // поделить
+    POWER // возведение в степень
+};*/
 enum class Operation {
     NO_OPERATION,
     MULTIPLICATION,
@@ -68,6 +76,7 @@ private:
 
     double memory_cell_;// число, сохранённое в память
     bool memory_saved_;// = false;// флаг, показывающий, что память не пуста
+    bool waiting_for_new_number_;
 
     void SetOperation(Operation op);
     QString OpToString(Operation op);
