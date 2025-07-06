@@ -9,15 +9,7 @@ namespace Ui {
 class MainWindow;
 }
 QT_END_NAMESPACE
-/*
-enum CalcOperations{
-    NO_OPERATION, // операция не задана
-    ADDITION, // плюс
-    SUBTRACTION, // минус
-    MULTIPLICATION, // умножить
-    DIVISION, // поделить
-    POWER // возведение в степень
-};*/
+
 enum class Operation {
     NO_OPERATION,
     MULTIPLICATION,
@@ -74,8 +66,8 @@ private:
     QString input_number_;// вводимое число в виде строки
     double active_number_;// = 0.0;//число, которое сейчас отображается в l_result в виде double. Это может быть результат предыдущего вычисления либо введённое число.
 
-    double memory_cell_;// число, сохранённое в память
-    bool memory_saved_;// = false;// флаг, показывающий, что память не пуста
+    Number memory_cell_;// число, сохранённое в память
+    bool memory_saved_;// флаг, показывающий, что память не пуста
     bool waiting_for_new_number_;
 
     void SetOperation(Operation op);
